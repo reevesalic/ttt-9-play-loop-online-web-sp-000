@@ -35,4 +35,66 @@ def turn(board)
   end
 end
 
-# Define your play method below
+WIN_COMBINATIONS = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+]
+
+def won?(board)
+  WIN_COMBINATIONS.each do |single_win_combo|
+    win_index_1 = single_win_combo[0]
+    win_index_2 = single_win_combo[1]
+    win_index_3 = single_win_combo[2]
+
+    position_1 = board[win_index_1]
+    position_2 = board[win_index_2]
+    position_3 = board[win_index_3]
+
+    if position_1 == position_2 && position_2 == position_3 && position_taken?(board, win_index_1)
+      return single_win_combo
+    end
+  end
+  return false
+end
+
+def full?(board)
+  if board.any? {|index| index == nil || index == " "}
+    return false
+  else
+    return true
+  end
+end
+
+def draw?(board)
+   if !won?(board) && full?(board)
+     return true
+   elsif!full?(board) && !won?(board)
+     return false
+   else won?(board)
+     return false
+   end
+end
+
+def over?(board)
+  if draw?(board) || won?(board) || full?(board)
+    return true
+  else
+    return false
+  end
+end
+# TROUBLESHOOTING: It’s important to think of position_1, position_2, position_3 as reusable and that they will cycle through all 9 spaces on the board. The elegance of comparing them to each other also got me. In draw?(board), the appearance and sequence of won?(board) and full?(board) matter.
+
+
+def play(board)
+  counter = 0
+  until counter == 9
+  turn(board)
+  counter += 1
+  end
+end
