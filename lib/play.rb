@@ -90,6 +90,14 @@ def over?(board)
 end
 # TROUBLESHOOTING: It’s important to think of position_1, position_2, position_3 as reusable and that they will cycle through all 9 spaces on the board. The elegance of comparing them to each other also got me. In draw?(board), the appearance and sequence of won?(board) and full?(board) matter.
 
+<<<<<<< HEAD
+=======
+def winner(board)
+  if won?(board)
+    return board[won?(board)[0]]
+  end
+end
+>>>>>>> 77ffb7a7e353366cb43fc7ae3a6ae4c6508a1ebb
 
 def play(board)
   counter = 0
@@ -98,3 +106,19 @@ def play(board)
   counter += 1
   end
 end
+<<<<<<< HEAD
+=======
+
+def play(board)
+  until over?(board)
+    turn(board)
+  end
+
+  if won?(board)
+    winner(board) == "X" || winner(board) == "O"
+    puts "Congratulations #{winner(board)}!"
+  else draw?(board)
+    puts "Cats Game!"
+  end
+end
+>>>>>>> 77ffb7a7e353366cb43fc7ae3a6ae4c6508a1ebb
